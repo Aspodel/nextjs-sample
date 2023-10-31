@@ -1,47 +1,41 @@
-"use client";
 import { NextPage } from "next";
-import { useParams } from "next/navigation";
+import Image from "next/image";
 
 interface BreedDetailsProps {
-  params: {
-    id: string;
+  searchParams: {
+    name: string;
+    imageUrl: string;
   };
 }
 
-const BreedDetails: NextPage = () => {
-  const params = useParams();
-  const id = params.id;
-  console.log(id);
+const BreedDetails: NextPage<BreedDetailsProps> = ({
+  searchParams,
+}: BreedDetailsProps) => {
+  console.log(searchParams.name);
   return (
     <div className="bg-gray-100 min-h-screen">
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
-          <h1 className="text-3xl font-bold text-gray-900">{id}</h1>
+          <h1 className="text-3xl font-bold text-gray-900">
+            {searchParams.name}
+          </h1>
           <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
             <div className="flex flex-col justify-center items-center">
-              <img
+              <Image
                 className="mt-4 rounded-lg shadow-lg"
-                src="https://images.dog.ceo/breeds/borzoi/n02090622_7135.jpg"
+                src={searchParams.imageUrl}
                 alt="Breed Image"
+                width={400}
+                height={400}
               />
             </div>
             <div className="flex flex-col justify-center">
               <h2 className="text-xl font-bold text-gray-900">
-                Additional Information
+                Detailed information
               </h2>
               <div className="mt-4">
-                <p className="text-lg font-medium text-gray-900">Breed: {id}</p>
                 <p className="text-lg font-medium text-gray-900">
-                  Origin: Afghanistan
-                </p>
-                <p className="text-lg font-medium text-gray-900">
-                  Temperament: Aloof, Clownish, Dignified, Independent, Happy
-                </p>
-                <p className="text-lg font-medium text-gray-900">
-                  Height: Male: 68–74 cm, Female: 63–69 cm
-                </p>
-                <p className="text-lg font-medium text-gray-900">
-                  Weight: Male: 25–34 kg, Female: 20–29 kg
+                  Breed: {searchParams.name}
                 </p>
               </div>
             </div>
